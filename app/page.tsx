@@ -1,8 +1,11 @@
-import React from 'react'
+import Hero from '@/components/Hero'
 
 const Home = () => {
   return (
-    <div className='flex-center font-zentry text-8xl text-blue-50 special-font h-screen'><span>Welcome to the <b>metaverse</b></span></div>
+    <main className='relative min-h-screen w-screen overflow-hidden'>
+      <Hero />
+      <div className='h-dvh bg-blue-75'></div>
+    </main>
   )
 }
 
