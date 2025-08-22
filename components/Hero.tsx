@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 const Hero = () => {
    const [currentIndex, setCurrentIndex] = useState(1)
    const [hasClicked, setHasClicked] = useState(false)
-   const [isLoading, setIsLoading] = useState(true)
+   const [isLoading, setIsLoading] = useState(false)
    const [loadedVideos, setLoadedVideos] = useState(0)
    const totalVideos = 4;
 
