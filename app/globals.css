@@ -43,12 +43,13 @@
   --color-yellow-100: #8e983f;
   --color-yellow-300: #edff66;
 }
-
+html,
 body {
   width: 100dvw;
   overflow-x: hidden;
   background-color: #dfdff0;
   font-family: "General Sans", sans-serif;
+  scroll-behavior: smooth;
 }
 
 @utility border-hsla {
