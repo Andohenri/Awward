@@ -2,15 +2,27 @@
 import React, { useRef, useState } from 'react'
 import { TiLocationArrow } from 'react-icons/ti'
 
-const BentoTilt = ({ children, className }) => {
+interface BentoProps {
+   children: React.ReactNode;
+   className?: string;
+}
+
+interface BentoCardProps {
+   src: string;
+   title: React.ReactNode;
+   description: string;
+   isComingSoon: boolean;
+}
+
+const BentoTilt = ({ children, className }: BentoProps) => {
    const [transformStyle, setTransformStyle] = useState('')
    const itemRef = useRef<HTMLDivElement | null>(null);
 
-   const handleMouseMove = (e) => {
+   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
       if (!itemRef.current) return;
       const { top, left, height, width } = itemRef.current.getBoundingClientRect();
       const relativeX = (e.clientX - left) / width;
-      const relativeY = (e.clientX - top) / height;
+      const relativeY = (e.clientY - top) / height;
       const tiltX = (relativeX - 0.5) * 5;
       const tiltY = (relativeY - 0.5) * -5;
 
@@ -29,7 +41,7 @@ const BentoTilt = ({ children, className }) => {
    )
 }
 
-const BentoCard = ({ src, title, description, isComingSoon }: { src: string, title: string, description: string, isComingSoon: boolean }) => {
+const BentoCard = ({ src, title, description, isComingSoon }: BentoCardProps) => {
    return (
       <div className='relative size-full'>
          <video src={src} loop muted autoPlay className='absolute top-0 left-0 size-full object-cover object-center' />
@@ -70,7 +82,7 @@ const Features = () => {
                      isComingSoon={true}
                   />
                </BentoTilt>
-               <BentoTilt className="bento-tilt_1 row-span-1 ms-32 md:col-span-1 md:ms-0">
+               <BentoTilt className="bento-tilt_1 row-span-1 ms-32 md:col-span-1 !md:ms-0">
                   <BentoCard
                      src="/videos/feature-3.mp4"
                      title={<>n<b>e</b>xus</>}
@@ -78,7 +90,7 @@ const Features = () => {
                      isComingSoon={true}
                   />
                </BentoTilt>
-               <BentoTilt className="bento-tilt_1 me-14 md:col-span-1 md:me-0">
+               <BentoTilt className="bento-tilt_1 me-14 md:col-span-1 !md:me-0">
                   <BentoCard
                      src="/videos/feature-4.mp4"
                      title={<>az<b>u</b>l</>}
