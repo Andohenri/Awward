@@ -11,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const Hero = () => {
    const [currentIndex, setCurrentIndex] = useState(1)
+   const [backgroundIndex, setBackgroundIndex] = useState(1)
    const [hasClicked, setHasClicked] = useState(false)
    const [isLoading, setIsLoading] = useState(true)
    const [loadedVideos, setLoadedVideos] = useState(0)
@@ -27,6 +28,14 @@ const Hero = () => {
          setIsLoading(false);
       }
    }, [loadedVideos])
+
+   useEffect(() => {
+      const timer = setTimeout(() => {
+         setBackgroundIndex(currentIndex === totalVideos - 1 ? 1 : currentIndex)
+      }, 1500)
+
+      return () => clearTimeout(timer)
+   }, [currentIndex, totalVideos])
 
    useGSAP(() => {
       if (hasClicked) {
@@ -81,7 +90,7 @@ const Hero = () => {
       setLoadedVideos(prev =>  prev + 1);
    }
 
-   const getVideoSrc = (index: number) => `videos/hero-${index}.mp4`;
+   const getVideoSrc = (index: number) => `videos/hero-${index}.webm`;
 
    return (
       <section className='relative h-dvh w-screen overflow-x-hidden'>
@@ -120,7 +129,7 @@ const Hero = () => {
                />
                <video
                   ref={backgroundVideoRef}
-                  src={getVideoSrc(currentIndex === totalVideos - 1 ? 1 : currentIndex)}
+                  src={getVideoSrc(backgroundIndex)}
                   autoPlay loop muted
                   className='absolute left-0 top-0 size-full object-cover'
                   preload='auto'
